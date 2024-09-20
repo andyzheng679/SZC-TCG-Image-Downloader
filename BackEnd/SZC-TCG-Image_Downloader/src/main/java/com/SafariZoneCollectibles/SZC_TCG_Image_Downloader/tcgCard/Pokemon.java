@@ -8,10 +8,13 @@ public class Pokemon {
 
     private String imgURL;
 
-    public Pokemon(String name, String rarity, String imgURL) {
+    private String tcgplayerUrl;
+
+    public Pokemon(String name, String rarity, String imgURL, String tcgplayerUrl) {
         this.name = name;
         this.rarity = rarity;
         this.imgURL = imgURL;
+        this.tcgplayerUrl = tcgplayerUrl;
     }
 
     public String getName() {
@@ -36,5 +39,13 @@ public class Pokemon {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public String getTcgplayerUrl() {
+        return tcgplayerUrl;
+    }
+
+    public void setTcgplayerUrl(String tcgplayerUrl) {
+        this.tcgplayerUrl = tcgplayerUrl;
     }
 }

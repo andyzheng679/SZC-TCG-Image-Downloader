@@ -77,8 +77,9 @@ public class PokemonService {
                 String name = cardInfo.get("name").asText();
                 String rarity = cardInfo.get("rarity").asText();
                 String imgURL = cardInfo.get("images").get("large").asText();
+                String tcgplayerUrl = cardInfo.get("tcgplayer").get("url").asText();
 
-                Pokemon pokemon = new Pokemon(name, rarity, imgURL);
+                Pokemon pokemon = new Pokemon(name, rarity, imgURL, tcgplayerUrl);
 
                 pokemonCardsData.add(pokemon);
             }
