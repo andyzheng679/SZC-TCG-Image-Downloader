@@ -1,0 +1,13 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the dropdown and search bar */
+}
+
+input {
+  padding: 5px;
+}
+
+select {
+  padding: 5px;
+}

@@ -1,68 +1,119 @@
 import React, { useState, useEffect } from 'react';
 
-function TcgDropDown() {
-  const [data, setData] = useState([]);   // To store the fetched data
-  const [filteredData, setFilteredData] = useState([]);  // To store filtered data for the dropdown
-  const [searchTerm, setSearchTerm] = useState("");  // To store the user's search term
-  const [selectedSet, setSelectedSet] = useState(null); // Store the selected TCG set
+function TcgSelector() {
+  const [selectedTcg, setSelectedTcg] = useState("");  // Store the selected TCG
+  const [sets, setSets] = useState({});  // Store fetched sets as a map
+  const [searchTerm, setSearchTerm] = useState("");  // Store search term
+  const [filteredSets, setFilteredSets] = useState([]);  // Store filtered sets
+  const [pokemonSetData, setPokemonSetData] = useState(null);  // Store detailed set data
+  const [showSets, setShowSets] = useState(true);  // Control visibility of the sets dropdown
+  const [selectedSetName, setSelectedSetName] = useState("");  // Store the name of the selected set
 
-  // Fetch data when the component mounts
+  // Fetch TCG sets based on the selected TCG
   useEffect(() => {
-    fetch('http://localhost:8080/test3')
-      .then(response => response.json())
-      .then(data => {
-        const entries = Object.entries(data);
-        setData(entries); // Store the data from the backend
-        setFilteredData(entries); // Initialize the filtered data with all options
-      })
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    if (selectedTcg) {
+      fetchTcgSets(selectedTcg);
+    }
+  }, [selectedTcg]);
 
-  // Function to handle user typing in the search bar
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    const filtered = data.filter(([key]) => key.toLowerCase().includes(event.target.value.toLowerCase()));
-    setFilteredData(filtered);
+  // Function to fetch sets based on selected TCG
+  const fetchTcgSets = (tcg) => {
+    let endpoint = '';
+    switch (tcg) {
+      case 'pokemon':
+        endpoint = '/pokemon/all';
+        break;
+      default:
+        return;
+    }
+
+    fetch(`http://localhost:8080${endpoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSets(data);  // Store fetched sets as a map
+        setFilteredSets(Object.entries(data));  // Initialize with all data converted to an array
+      })
+      .catch((error) => console.error('Error fetching TCG sets:', error));
   };
 
-  // Function to handle selection of a set
-  const handleSelectSet = (setName) => {
-    setSelectedSet(setName);  // Set the selected set name
-    setSearchTerm(setName);   // Put the selected set into the search bar
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    // Filter sets based on the search term by filtering the key of each map entry
+    const filtered = Object.entries(sets).filter(([key]) => 
+      key.toLowerCase().includes(term)
+    );
+    setFilteredSets(filtered);  // Update filtered sets
+  };
+
+  // Fetch detailed set data when a set is selected
+  const handleSetSelect = (setName, setId) => {
+    setSelectedSetName(setName);  // Store the name of the selected set
+    setSearchTerm(setName);  // Fill the search bar with the selected set name
+    setShowSets(false);  // Hide the set list but keep the TCG dropdown
+
+    fetch(`http://localhost:8080/pokemon/set/${setId}`)
+      .then(response => response.json())
+      .then(data => {
+        setPokemonSetData(data);  // Store the detailed set data (cards)
+      })
+      .catch((error) => console.error('Error fetching set data:', error));
   };
 
   return (
     <div className="App">
-      <h1>Search for a TCG Set</h1>
-      
-      {/* Search input field */}
-      <input 
-        type="text" 
-        placeholder="Search TCG Sets..." 
-        value={searchTerm} 
-        onChange={handleSearchChange} 
-        onFocus={() => setFilteredData(data)}  // Show dropdown when the input is focused
-      />
+      <h1>Select a TCG</h1>
 
-      {/* Display the dropdown options */}
-      {filteredData.length > 0 && (
+      {/* Container to align dropdown and search bar side by side */}
+      <div className="input-container">
+        {/* Dropdown for selecting TCG */}
+        <select value={selectedTcg} onChange={(e) => setSelectedTcg(e.target.value)}>
+          <option value="">--Select a TCG--</option>
+          <option value="pokemon">Pokémon</option>
+          {/* Add more TCG options as needed */}
+        </select>
+
+        {/* Search bar for filtering sets */}
+        <input
+          type="text"
+          placeholder={`Search ${selectedTcg} sets...`}
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
+
+      {/* Display filtered sets and allow selecting a set */}
+      {filteredSets.length > 0 && showSets && (
         <ul>
-          {filteredData.map(([key]) => (
-            <li key={key} onClick={() => handleSelectSet(key)}>
-              {key}
+          {filteredSets.map(([setName, setId]) => (
+            <li key={setId} onClick={() => handleSetSelect(setName, setId)}>
+              {setName} (ID: {setId})
             </li>
           ))}
         </ul>
       )}
 
-      {/* Display the selected set if available */}
-      {selectedSet && (
+      {/* Display detailed set data */}
+      {pokemonSetData && (
         <div>
-          <h2>Selected Set: {selectedSet}</h2>
+          <h2>Details for Set: {selectedSetName}</h2>
+          <ul>
+            {pokemonSetData.map(pokemon => (
+              <li key={pokemon.name}>
+                <strong>{pokemon.name}</strong> - {pokemon.rarity}
+                <br />
+                <img src={pokemon.imgURL} alt={pokemon.name} style={{ width: '100px' }} />
+                <br />
+                <a href={pokemon.tcgplayerUrl} target="_blank" rel="noopener noreferrer">Buy on TCGPlayer</a>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
   );
 }
 
-export default TcgDropDown;
+export default TcgSelector;
