@@ -12,7 +12,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/pokemon")
-public class Controller {
+public class PokemonController {
 
     @Autowired
     private PokemonService pokemonService;
@@ -33,7 +33,7 @@ public class Controller {
 //    }
 
     @GetMapping("/all")
-    public ResponseEntity<Map<String, String>> testing3(){
+    public ResponseEntity<Map<String, String>> getAllPokemonSets(){
         Map<String, String> allSets = pokemonService.allSets(pokemonService.getPokemonSets());
         return ResponseEntity.ok(allSets);
     }
