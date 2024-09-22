@@ -22,7 +22,7 @@ function TcgDropDown() {
     let endpoint = '';
     switch (tcg) {
       case 'pokemon':
-        endpoint = '/pokemon/all';
+        endpoint = '/pokemon/set';
         break;
       default:
         return;

@@ -32,7 +32,7 @@ public class PokemonController {
 //        return ResponseEntity.ok(pokemonArray);
 //    }
 
-    @GetMapping("/all")
+    @GetMapping("/set")
     public ResponseEntity<Map<String, String>> getAllPokemonSets(){
         Map<String, String> allSets = pokemonService.allSets(pokemonService.getPokemonSets());
         return ResponseEntity.ok(allSets);
