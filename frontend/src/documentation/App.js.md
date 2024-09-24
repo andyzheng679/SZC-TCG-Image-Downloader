@@ -7,4 +7,4 @@ const [selectedTcg, setSelectedTcg] = useState(""); - constant array, useState, 
 const handleTcgChange - constanst function that takes in one param, the event. The event is attached to onChange in TCGDropDown, onChange will call the function and pass the event through it. Then calls the setSelectedTcg to change the state of what value is. event.target give us access to the <select> element, and event.target.value gives us access to the value in the select. 
 
 
-<TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange}/> - rendering, passing in the state selectedTcg and the function handleTcgChange as a prop. 
+TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange} - rendering, passing in the state selectedTcg and the function handleTcgChange as a prop. 
