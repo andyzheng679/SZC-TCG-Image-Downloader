@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import TCGDropDown from './components/TCGDropDown';
+import SearchBar from './components/SearchBar';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
     <div className="App">
 
       <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange}/>
-
+      <SearchBar/>
     </div>
   );
 }

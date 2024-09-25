@@ -4,6 +4,10 @@ function App() - responsible for defining the structure and logic of the applica
 
 const [selectedTcg, setSelectedTcg] = useState(""); - constant array, useState, useEffect, selectedTcg will start as an empty String and setSelectedTcg will have code to change it. Keeping track of the selected TCG.
 
+const [apiEndPoint, setApiEndPoint] = useState(""); - apiEndPoint will start as an empty String, but will change to the endpoint for the selected TCG. setApiEndPoint will contain code to change the state.
+
+const [sets, setSets] = useState({}); - sets will start as an empty map, but will change to the data of the sets and the set id. setSets will contain code to change the state.
+
 
 
 
