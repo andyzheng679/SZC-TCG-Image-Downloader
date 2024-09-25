@@ -8,6 +8,7 @@ function App() {
 
   const [selectedTcg, setSelectedTcg] = useState("");
   const [apiEndPoint, setApiEndPoint] = useState("");
+  const [sets, setSets] = useState({});
 
   const handleTcgChange = (event) => {
     setSelectedTcg(event.target.value);
@@ -29,6 +30,17 @@ function App() {
     }
   }, [selectedTcg]);
 
+  useEffect(() => {
+    if(apiEndPoint){
+      fetch(`http://localhost:8080${apiEndPoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSets(data);
+        console.log("Fetched data:", data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [apiEndPoint]);
 
 
   return (

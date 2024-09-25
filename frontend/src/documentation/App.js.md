@@ -15,5 +15,8 @@ const handleTcgChange - constanst function that takes in one param, the event. T
 
 useEffect [selectedTcg] - selectedTcg is the state this function depends on. Will trigger this funchtion when the state of selectedTcg changes. Depending on what selectedTcg is, a swtich statement will get the endpoint, pass it to setApiEndPoint to change the state of apiEndPoint.
 
+useEffect [apiEndPoint] - apiEndPoint is the state this function depends on. Will trigger this function when the state of apiEndPoint changes. If the apiEndPoint is not empty then go fetch from 8080 plus the apiEndPoint. .then response will convert the response into JSON format. .then data will parse the data that is in JSON and pass it into setSets to change the empty map state to the data. Console.logs used for debugging. .catch, catch block, let's us know what the error message is. 
+
+
 
 TCGDropDown - rendering, passing in the state selectedTcg and the function handleTcgChange as a prop. 
