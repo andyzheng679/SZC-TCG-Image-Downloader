@@ -44,6 +44,16 @@ function App() {
     }
   }, [apiEndPoint]);
 
+  const fetechSetData = (setID) => {
+    fetch(`http://localhost:8080${apiEndPoint}/set/${setID}`)
+    .then((response) => response.json())
+      .then((data) => {
+        setSets(data);
+        console.log("Fetched data:", data);
+      })
+      .catch((error) => console.error("Error fetching set data:", error));
+  };
+
 
   return (
 
