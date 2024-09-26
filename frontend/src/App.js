@@ -10,6 +10,7 @@ function App() {
   const [apiEndPoint, setApiEndPoint] = useState("");
   const [sets, setSets] = useState({});
   const [searchTerm, setSearchTerm] = useState(""); 
+  const [tcgSetData, setTcgSetData] = useState([]);
 
   const handleTcgChange = (event) => {
     setSelectedTcg(event.target.value);
