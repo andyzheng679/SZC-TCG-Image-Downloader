@@ -9,6 +9,7 @@ function App() {
   const [selectedTcg, setSelectedTcg] = useState("");
   const [apiEndPoint, setApiEndPoint] = useState("");
   const [sets, setSets] = useState({});
+  const [searchTerm, setSearchTerm] = useState(""); 
 
   const handleTcgChange = (event) => {
     setSelectedTcg(event.target.value);
@@ -47,7 +48,7 @@ function App() {
     <div className="App">
 
       <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange}/>
-      <SearchBar/>
+      <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> {/* Pass sets to SearchBar */}
     </div>
   );
 }

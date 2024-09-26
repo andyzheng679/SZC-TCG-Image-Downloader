@@ -8,7 +8,7 @@ const [apiEndPoint, setApiEndPoint] = useState(""); - apiEndPoint will start as 
 
 const [sets, setSets] = useState({}); - sets will start as an empty map, but will change to the data of the sets and the set id. setSets will contain code to change the state.
 
-
+const [searchTerm, setSearchTerm] = useState("");  - searchedTerm will start as an empty string, this will hold what the user is typing in the search bar, input field. setSearchTerm will update the state. 
 
 
 const handleTcgChange - constanst function that takes in one param, the event. The event is attached to onChange in TCGDropDown, onChange will call the function and pass the event through it. Then calls the setSelectedTcg to change the state of what value is. event.target give us access to the select element, and event.target.value gives us access to the value in the select.
