@@ -45,10 +45,14 @@ function App() {
 
 
   return (
-    <div className="App">
 
-      <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange}/>
-      <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+    <div className="App">
+      <h1>TCG Image Downloader</h1>
+      
+      <div className="input-container">
+        <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange} className="tcg-dropdown" />
+        <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        </div>
     </div>
   );
 }

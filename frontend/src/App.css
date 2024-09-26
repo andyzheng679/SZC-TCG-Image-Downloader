@@ -1,7 +1,24 @@
-.search-container {
+/* Container for TCGDropDown and SearchBar to align them horizontally */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the entire container horizontally */
+    gap: 10px; /* Space between the dropdown and search bar */
+  }
+  
+  /* TCGDropdown specific styling */
+  .tcg-dropdown {
+    width: 150px; /* Adjust as needed */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Adjust SearchBar styling to fit within the new layout */
+  .search-container {
     position: relative;
     width: 300px;  /* Adjust the width as necessary */
-    margin: 0 auto; /* Center the search bar horizontally */
   }
   
   .search-container input {
@@ -40,5 +57,9 @@
   
   .dropdown li:last-child {
     border-bottom: none; /* Remove the border from the last item */
+  }
+
+  .App {
+    text-align: center; /* Center all text inside .App */
   }
   
