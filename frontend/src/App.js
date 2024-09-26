@@ -2,6 +2,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import TCGDropDown from './components/TCGDropDown';
 import SearchBar from './components/SearchBar';
+import CardList from './components/CardList';
 
 
 function App() {
@@ -44,11 +45,11 @@ function App() {
     }
   }, [apiEndPoint]);
 
-  const fetechSetData = (setID) => {
-    fetch(`http://localhost:8080${apiEndPoint}/set/${setID}`)
+  const fetchSetData = (setID) => {
+    fetch(`http://localhost:8080${apiEndPoint}/${setID}`)
     .then((response) => response.json())
       .then((data) => {
-        setSets(data);
+        setTcgSetData(data);
         console.log("Fetched data:", data);
       })
       .catch((error) => console.error("Error fetching set data:", error));
@@ -62,7 +63,11 @@ function App() {
       
       <div className="input-container">
         <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange} className="tcg-dropdown" />
-        <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+        <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchSetData={fetchSetData}/>
+
+        <CardList tcgSetData={tcgSetData}/>
+
         </div>
     </div>
   );

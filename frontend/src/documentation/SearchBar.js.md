@@ -1,4 +1,4 @@
-function SearchBar - component accepts three props, sets: a map containing the data to be searched, searchTerm: the current value in the search input field, setSearchTerm: code to change searchTerm. 
+function SearchBar - component accepts four props, sets: a map containing the data to be searched, searchTerm: the current value in the search input field, setSearchTerm: code to change searchTerm, fetchSetData: will take in the key from the set and fetch all the card data from it. 
 
 const [showDropDown, setShowDropDown] = useState(false); - showDropDown will start as false, and setShowDropDown will change the state. Use to show the dropdown of the sets or not.
 

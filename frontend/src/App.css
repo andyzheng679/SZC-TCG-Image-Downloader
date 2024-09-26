@@ -1,65 +1,103 @@
 /* Container for TCGDropDown and SearchBar to align them horizontally */
 .input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the entire container horizontally */
-    gap: 10px; /* Space between the dropdown and search bar */
-  }
-  
-  /* TCGDropdown specific styling */
-  .tcg-dropdown {
-    width: 150px; /* Adjust as needed */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Adjust SearchBar styling to fit within the new layout */
-  .search-container {
-    position: relative;
-    width: 300px;  /* Adjust the width as necessary */
-  }
-  
-  .search-container input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdown {
-    position: absolute;
-    width: 100%;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 200px; /* Limit height if too many options */
-    overflow-y: auto; /* Scroll if there are too many options */
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    z-index: 1000; /* Ensure it appears above other elements */
-  }
-  
-  .dropdown li {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee; /* Separate items with a subtle line */
-  }
-  
-  .dropdown li:hover {
-    background-color: #f0f0f0; /* Highlight on hover */
-  }
-  
-  .dropdown li:last-child {
-    border-bottom: none; /* Remove the border from the last item */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the entire container horizontally */
+  gap: 10px; /* Space between the dropdown and search bar */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+}
 
-  .App {
-    text-align: center; /* Center all text inside .App */
-  }
-  
+/* TCGDropdown specific styling */
+.tcg-dropdown {
+  width: 150px; /* Adjust as needed */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Adjust SearchBar styling to fit within the new layout */
+.search-container {
+  position: relative;
+  width: 300px;  /* Adjust the width as necessary */
+  min-height: 50px; /* Ensure enough height for input and dropdown */
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: lightyellow; /* Debugging background */
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  background-color: lightblue; /* Debugging background */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px; /* Limit height if too many options */
+  overflow-y: auto; /* Scroll if there are too many options */
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0 0; /* Add space between the input and dropdown */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee; /* Separate items with a subtle line */
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.dropdown li:last-child {
+  border-bottom: none; /* Remove the border from the last item */
+}
+
+/* Center all text inside .App */
+.App {
+  text-align: center; 
+}
+
+/* Container that holds all the cards */
+.card-data-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to the next row if necessary */
+  justify-content: space-around; /* Distribute space around cards */
+  gap: 20px; /* Add space between rows */
+  margin-top: 20px;
+}
+
+/* Each card item */
+.card-item {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically within each card */
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px; /* Width of each card */
+  text-align: center; /* Center the text within each card */
+}
+
+.card-item img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-item a {
+  color: blue;
+  text-decoration: none;
+}
+
+.card-item a:hover {
+  text-decoration: underline;
+}

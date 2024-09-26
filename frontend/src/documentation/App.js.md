@@ -19,8 +19,9 @@ useEffect [selectedTcg] - selectedTcg is the state this function depends on. Wil
 
 useEffect [apiEndPoint] - apiEndPoint is the state this function depends on. Will trigger this function when the state of apiEndPoint changes. If the apiEndPoint is not empty then go fetch from 8080 plus the apiEndPoint. .then response will convert the response into JSON format. .then data will parse the data that is in JSON and pass it into setSets to change the empty map state to the data. Console.logs used for debugging. .catch, catch block, let's us know what the error message is. 
 
+const fetchSetData - takes in setID param, from the search bar, fetches based on the apiEndPoint and the setid, converts the data into JSON format using .then response, .JSON. pass it into setTcgSetData to change the state to the list of data. Console.logs used for debugging. .catch, catch block, let's us know what the error message is. 
 
 
 TCGDropDown - rendering, passing in the state selectedTcg and the function handleTcgChange as a prop. 
 
-SearchBar - rendering, passing state sets, searchTerms and the function setSearchTerm as props.
+SearchBar - rendering, passing state sets, searchTerms, the function setSearchTerm and the function fetchSetData as props.
