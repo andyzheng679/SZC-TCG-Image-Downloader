@@ -20,3 +20,5 @@ useEffect [apiEndPoint] - apiEndPoint is the state this function depends on. Wil
 
 
 TCGDropDown - rendering, passing in the state selectedTcg and the function handleTcgChange as a prop. 
+
+SearchBar - rendering, passing state sets, searchTerms and the function setSearchTerm as props.

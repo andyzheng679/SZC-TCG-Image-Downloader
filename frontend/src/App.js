@@ -48,7 +48,7 @@ function App() {
     <div className="App">
 
       <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange}/>
-      <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/> {/* Pass sets to SearchBar */}
+      <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
     </div>
   );
 }
