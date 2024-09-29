@@ -1,6 +1,6 @@
 function CardList - accepts one prop, the tcgSetData, all the cards in the set. Takes the data and displays it. 
 
-The if statement checks if at least one of the condition is true, then don't return anything. Due to the original state of tcgSetData being an empty array, we need to check if the length is zero.
+The if statement checks if at least one of the condition is true, then don't return anything. Due to the original state of tcgSetData being an empty array, we need to check if the length is zero. Can take off the is array since the state will always be an array.
 
 return:
 
