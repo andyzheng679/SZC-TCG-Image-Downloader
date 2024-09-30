@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import TCGDropDown from './components/TCGDropDown';
 import SearchBar from './components/SearchBar';
 import CardList from './components/CardList';
+import DownloadButton from './components/DownloadButton';
 
 
 function App() {
@@ -65,8 +66,9 @@ function App() {
         <TCGDropDown selectedTcg={selectedTcg} handleTcgChange={handleTcgChange} className="tcg-dropdown" />
 
         <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchSetData={fetchSetData}/>
-
+        <DownloadButton tcgSetData={tcgSetData}/>
         <CardList tcgSetData={tcgSetData}/>
+        
 
         </div>
     </div>
