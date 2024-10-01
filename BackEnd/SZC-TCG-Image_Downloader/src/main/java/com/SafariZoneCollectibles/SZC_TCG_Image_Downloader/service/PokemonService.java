@@ -32,8 +32,6 @@ public class PokemonService {
     }
 
 
-
-
     public Map<String, String> allSets(String jsonData){
         Map<String, String> pokemonSetsData = new LinkedHashMap<>();
 
@@ -77,14 +75,17 @@ public class PokemonService {
             while(arrayData.hasNext()){
                 JsonNode cardInfo = arrayData.next();
 
-                String name = cardInfo.get("name").asText();
-                String rarity = cardInfo.get("rarity").asText();
-                String imgURL = cardInfo.get("images").get("large").asText();
-                String tcgplayerUrl = cardInfo.get("tcgplayer").get("url").asText();
-                String number = cardInfo.get("number").asText();
+                String name = cardInfo.has("name") ? cardInfo.get("name").asText() : "Unknown";
+                String rarity = cardInfo.has("rarity") ? cardInfo.get("rarity").asText() : "Unknown";
+                String imgURL = cardInfo.has("images") && cardInfo.get("images").has("large")
+                        ? cardInfo.get("images").get("large").asText()
+                        : "NoImageURL";
+                String tcgplayerUrl = cardInfo.has("tcgplayer") && cardInfo.get("tcgplayer").has("url")
+                        ? cardInfo.get("tcgplayer").get("url").asText()
+                        : "NoTCGPlayerURL";
+                String number = cardInfo.has("number") ? cardInfo.get("number").asText() : "Unknown";
 
                 Pokemon pokemon = new Pokemon(name + "-" + number, rarity, imgURL, tcgplayerUrl);
-
                 pokemonCardsData.add(pokemon);
             }
 
