@@ -65,7 +65,6 @@ function App() {
 
         <SearchBar sets={sets} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchSetData={fetchSetData}/>
 
-        
         <CardList tcgSetData={tcgSetData}/> 
       </div>
     </div>
