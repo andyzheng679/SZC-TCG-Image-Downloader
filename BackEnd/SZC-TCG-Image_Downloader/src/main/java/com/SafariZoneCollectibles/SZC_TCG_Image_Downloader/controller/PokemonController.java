@@ -42,7 +42,7 @@ public class PokemonController {
         InputStream inputStream = new URL(imageUrl).openStream();
 
         // Construct the file name using the card name and rarity, replacing spaces with underscores
-        String fileName = cardName.replace(" ", "_") + "_" + rarity.replace(" ", "_") + ".png";
+        String fileName = cardName + "_" + rarity + ".png";
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
