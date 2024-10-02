@@ -20,8 +20,8 @@ public class LorcanaController {
     private LorcanaService lorcanaService;
 
     @GetMapping("/set")
-    public ResponseEntity<Map<String, Integer>> getAllSets(){
-        Map<String, Integer> getAllSets = lorcanaService.allSets(lorcanaService.getLorcanaSets());
+    public ResponseEntity<Map<String, String>> getAllSets(){
+        Map<String, String> getAllSets = lorcanaService.allSets(lorcanaService.getLorcanaSets());
         return ResponseEntity.ok(getAllSets);
     }
 
