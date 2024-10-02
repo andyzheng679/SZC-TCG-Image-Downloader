@@ -16,6 +16,8 @@ button - creates a button, onClick is event handler that triggers when the butto
 img src - displays the card's image using imgURL.
 alt - in event where img can't be displayed, show card name.
 style - inline CSS, sets the width of the image to 150 pixels, then line break.
+Ternary operator: condition ? valueIfTrue : valueIfFalse, checks if there is a tcgplayerUrl.
 a href - creates a hyperlink that directs to tcgplayerUrl.
+span - an inline element, it won't disrupt the layout or break the flow of the content.
 target - opens the link in a new tab.
 rel - noopener prevents the new tab of window from being able to access the original page through window.opener, prevents a form of phishing called tabnabbing. noreferrer prevents browser from sending the Referer header to the new page, it tells the new page what website the user came from, noreferrer prevents that.  
