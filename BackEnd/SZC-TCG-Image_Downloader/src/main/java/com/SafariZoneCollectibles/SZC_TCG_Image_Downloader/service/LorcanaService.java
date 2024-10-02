@@ -71,9 +71,9 @@ public class LorcanaService {
 
                 String name = setData.has("Name") ? setData.get("Name").asText() : "Unknown";
                 String rarity = setData.has("Rarity") ? setData.get("Rarity").asText() : "Unknown";
-                String imgUrl = setData.has("Image") ? setData.get("Image").asText() : "No Image";
+                String imgURL = setData.has("Image") ? setData.get("Image").asText() : "No Image";
 
-                Lorcana lorcana = new Lorcana(name, rarity, imgUrl);
+                Lorcana lorcana = new Lorcana(name, rarity, imgURL);
 
                 allCards.add(lorcana);
             }

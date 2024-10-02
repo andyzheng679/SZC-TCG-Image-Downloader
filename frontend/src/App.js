@@ -22,8 +22,8 @@ function App() {
       case "pokemon":
         setApiEndPoint("/pokemon/set");
         break;
-      case "testing":
-        setApiEndPoint("/testing/set");
+      case "lorcana":
+        setApiEndPoint("/lorcana/set");
         break;
       case "testing2":
         setApiEndPoint("/testing2/set");

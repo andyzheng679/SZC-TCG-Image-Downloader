@@ -6,12 +6,12 @@ public class Lorcana {
 
     private String rarity;
 
-    private String imgUrl;
+    private String imgURL;
 
-    public Lorcana(String name, String rarity, String imgUrl) {
+    public Lorcana(String name, String rarity, String imgURL) {
         this.name = name;
         this.rarity = rarity;
-        this.imgUrl = imgUrl;
+        this.imgURL = imgURL;
     }
 
     public String getName() {
@@ -30,11 +30,11 @@ public class Lorcana {
         this.rarity = rarity;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImgURL() {
+        return imgURL;
     }
 
     public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+        this.imgURL = imgUrl;
     }
 }
