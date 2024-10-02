@@ -14,8 +14,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://szc-tcg-image-downloader-1.onrender.com")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/lorcana")
 public class LorcanaController {

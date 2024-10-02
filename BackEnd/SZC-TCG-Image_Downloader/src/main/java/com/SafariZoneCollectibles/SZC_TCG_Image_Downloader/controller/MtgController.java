@@ -2,7 +2,6 @@ package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.controller;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.MtgService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Mtg;
-import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://szc-tcg-image-downloader-1.onrender.com")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/mtg")
 public class MtgController {
