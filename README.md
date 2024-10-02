@@ -16,5 +16,5 @@ To bring this App to life, I utilized several APIs:
 
 I used React for the frontend and Spring Boot for the backend, and I containerized the app using Docker for easy deployment and scalability. Building this app gave me valuable experience in reading and understanding API documentation while creating a streamlined user experience.
 
-
+<img src="https://github.com/andyzheng679/SZC-TCG-Image-Downloader/blob/eeffda1790cb875c03341219e6f554adb8aad6b8/Screenshot_2024-10-02_at_12.32.07_PM.png" />
 
