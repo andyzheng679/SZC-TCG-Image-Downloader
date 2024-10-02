@@ -25,8 +25,8 @@ function App() {
       case "lorcana":
         setApiEndPoint("/lorcana/set");
         break;
-      case "testing2":
-        setApiEndPoint("/testing2/set");
+      case "mtg":
+        setApiEndPoint("/mtg/set");
         break;
       default:
         setApiEndPoint("");
