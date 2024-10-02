@@ -35,7 +35,8 @@ Then we get the value associated with the key "data".
 Using Iterator to loop through the elements in the Json Array in data variable. Iterating over a collection of JsonNodes.
 .elements() method is used to return an Iterator of elements in the Json array.
 While there is still another element in the array, set that element to a JsonNode variable. 
-Get the card "name", "rarity", "images" "large", "tcgplayer" "url", "number", set all of them as a String.
+Get the card "name", "rarity", "images" "large", "tcgplayer" "url", "number", set all of them as a String. 
+Using the ternary operator: condition ? valueIfTrue : valueIfFalse. It evaluates the condition before the ?, and depending on true or false, returns the value.
 Create instance of Pokemon and map all of that to it, combine the name and the number together. Add the instance to the ArrayList.
 
 public String getPokemonSetCards(String setID) - Returns raw JSON response from the API as a string, .getForObject() is used to send HTTP GET request to the URL,
