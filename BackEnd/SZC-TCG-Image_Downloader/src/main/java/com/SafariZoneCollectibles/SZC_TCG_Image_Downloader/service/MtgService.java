@@ -77,7 +77,6 @@ public class MtgService {
 
     public String getMtgCardSet(String code) {
         String url = allMtgCards + code;
-        System.out.println("Fetching data from URL: " + url);  // Log the URL
         return restTemplate.getForObject(url, String.class);
     }
 
