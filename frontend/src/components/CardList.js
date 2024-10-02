@@ -7,8 +7,12 @@ function CardList({ tcgSetData, selectedTcg}) {
   }
 
   const handleDownload = (imgURL, cardName, rarity) => {
-    window.location.href = `http://localhost:8080/${selectedTcg}/download-image?imageUrl=${encodeURIComponent(imgURL)}&cardName=${encodeURIComponent(cardName)}&rarity=${encodeURIComponent(rarity)}`;
+    window.location.href = `https://szc-tcg-image-downloader.onrender.com/${selectedTcg}/download-image?imageUrl=${encodeURIComponent(imgURL)}&cardName=${encodeURIComponent(cardName)}&rarity=${encodeURIComponent(rarity)}`;
   };
+
+  // const handleDownload = (imgURL, cardName, rarity) => {
+  //   window.location.href = `http://localhost:8080/${selectedTcg}/download-image?imageUrl=${encodeURIComponent(imgURL)}&cardName=${encodeURIComponent(cardName)}&rarity=${encodeURIComponent(rarity)}`;
+  // };
 
   return (
     <div className="card-data-container">

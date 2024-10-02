@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if(apiEndPoint){
-      fetch(`http://localhost:8080${apiEndPoint}`)
+      fetch(`https://szc-tcg-image-downloader.onrender.com${apiEndPoint}`)
       .then((response) => response.json())
       .then((data) => {
         setSets(data);
@@ -46,7 +46,7 @@ function App() {
   }, [apiEndPoint]);
 
   const fetchSetData = (setID) => {
-    fetch(`http://localhost:8080${apiEndPoint}/${setID}`)
+    fetch(`https://szc-tcg-image-downloader.onrender.com${apiEndPoint}/${setID}`)
     .then((response) => response.json())
       .then((data) => {
         setTcgSetData(data);
@@ -54,6 +54,28 @@ function App() {
       })
       .catch((error) => console.error("Error fetching set data:", error));
   };
+
+  // useEffect(() => {
+  //   if(apiEndPoint){
+  //     fetch(`http://localhost:8080${apiEndPoint}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setSets(data);
+  //       console.log("Fetched data:", data);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  //   }
+  // }, [apiEndPoint]);
+
+  // const fetchSetData = (setID) => {
+  //   fetch(`http://localhost:8080${apiEndPoint}/${setID}`)
+  //   .then((response) => response.json())
+  //     .then((data) => {
+  //       setTcgSetData(data);
+  //       console.log("Fetched data:", data);
+  //     })
+  //     .catch((error) => console.error("Error fetching set data:", error));
+  // };
 
 
   return (
