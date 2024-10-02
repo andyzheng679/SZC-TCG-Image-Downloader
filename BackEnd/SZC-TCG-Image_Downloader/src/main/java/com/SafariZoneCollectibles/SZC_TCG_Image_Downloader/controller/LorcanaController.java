@@ -41,7 +41,6 @@ public class LorcanaController {
     public ResponseEntity<InputStreamResource> downloadImage(@RequestParam String imageUrl, @RequestParam String cardName, @RequestParam String rarity) throws Exception {
         InputStream inputStream = new URL(imageUrl).openStream();
 
-        // Construct the file name using the card name and rarity, replacing spaces with underscores
         String fileName = cardName + "_" + rarity + ".png";
 
         return ResponseEntity.ok()

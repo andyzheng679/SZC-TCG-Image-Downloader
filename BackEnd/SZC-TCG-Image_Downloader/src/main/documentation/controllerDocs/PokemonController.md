@@ -10,7 +10,7 @@ Example: Backend is on localhost:8080 while the frontend is on localhost:3000. T
 @Autowired
 private PokemonService pokemonService; - field injection pokemon business logic.
 
-@GetMapping("/all")
+@GetMapping("/set")
 public ResponseEntity<Map<String, String>> getAllPokemonSets() - sending a get request to /pokemon/all, ResponseEntity is used to allow us to have control over HTTP responses,
 like status codes and error handling. Returns a Map, key value, String, String. This will return all pokemon sets in a Map, Name of set, set id.
 
