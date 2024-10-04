@@ -45,7 +45,19 @@ public class MtgService {
 
                 JsonNode cardInfo = arrayData.next();
 
-                if (cardInfo.has("card_faces") && !cardInfo.has("purchase_uris")) {
+                if (cardInfo.has("image_uris")){
+                    String name = cardInfo.has("name") ? cardInfo.get("name").asText() : "Unknown";
+                    String rarity = cardInfo.has("rarity") ? cardInfo.get("rarity").asText() : "Unknown";
+                    String imgURL = cardInfo.has("image_uris") && cardInfo.get("image_uris").has("large")
+                            ? cardInfo.get("image_uris").get("large").asText()
+                            : "NoImageURL";
+                    String tcgplayerUrl = cardInfo.has("purchase_uris") && cardInfo.get("purchase_uris").has("tcgplayer")
+                            ? cardInfo.get("purchase_uris").get("tcgplayer").asText()
+                            : "NoTCGPlayerURL";
+
+                    Mtg mtg = new Mtg(name, rarity, imgURL, tcgplayerUrl);
+                    mtgCardsData.add(mtg);
+                } else if (cardInfo.has("card_faces")) {
                     JsonNode frontFace = cardInfo.get("card_faces").get(0);
 
                     String name = frontFace.has("name") ? frontFace.get("name").asText() : "Unknown";
@@ -60,7 +72,6 @@ public class MtgService {
                     Mtg mtg = new Mtg(name, rarity, imgURL, tcgplayerUrl);
                     mtgCardsData.add(mtg);
                 } else {
-                    // Single-faced card handling
                     String name = cardInfo.has("name") ? cardInfo.get("name").asText() : "Unknown";
                     String rarity = cardInfo.has("rarity") ? cardInfo.get("rarity").asText() : "Unknown";
                     String imgURL = cardInfo.has("image_uris") && cardInfo.get("image_uris").has("large")
