@@ -45,7 +45,7 @@ public class MtgService {
 
                 JsonNode cardInfo = arrayData.next();
 
-                if (cardInfo.has("card_faces")) {
+                if (cardInfo.has("card_faces") && !cardInfo.has("purchase_uris")) {
                     JsonNode frontFace = cardInfo.get("card_faces").get(0);
 
                     String name = frontFace.has("name") ? frontFace.get("name").asText() : "Unknown";
