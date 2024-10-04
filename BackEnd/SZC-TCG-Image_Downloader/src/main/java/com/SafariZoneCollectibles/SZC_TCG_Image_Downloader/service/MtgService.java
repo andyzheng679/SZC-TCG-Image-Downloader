@@ -46,7 +46,7 @@ public class MtgService {
                 JsonNode cardInfo = arrayData.next();
 
                 if (cardInfo.has("card_faces")) {
-                    JsonNode frontFace = cardInfo.get("card_faces").get(0); 
+                    JsonNode frontFace = cardInfo.get("card_faces").get(0);
 
                     String name = frontFace.has("name") ? frontFace.get("name").asText() : "Unknown";
                     String rarity = cardInfo.has("rarity") ? cardInfo.get("rarity").asText() : "Unknown"; // Rarity is outside the card faces
