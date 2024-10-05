@@ -101,3 +101,71 @@
 .card-item a:hover {
   text-decoration: underline;
 }
+
+/* DARK MODE STYLES */
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Adjust input fields and dropdown for dark mode */
+.dark-mode .tcg-dropdown,
+.dark-mode .search-container input,
+.dark-mode .dropdown {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.dark-mode .dropdown li {
+  border-bottom: 1px solid #444444;
+}
+
+.dark-mode .dropdown li:hover {
+  background-color: #555555;
+}
+
+/* Adjust card items in dark mode */
+.dark-mode .card-item {
+  background-color: #333333;
+  border: 1px solid #555555;
+}
+
+.dark-mode .card-item a {
+  color: #00bfff; /* Lighter link color for dark mode */
+}
+
+.dark-mode .card-item a:hover {
+  color: #00ffff; /* Adjust hover color */
+}
+
+/* Additional refinement to dark mode for input containers */
+.dark-mode .input-container {
+  background-color: #222;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Flex container for h1 and dark mode toggle */
+.header-container {
+  display: flex;
+  align-items: center; /* Vertically align the h1 and the toggle */
+  justify-content: center; /* Center the h1 horizontally */
+  position: relative; /* Allows positioning the toggle within this container */
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Center the h1 */
+.header-container h1 {
+  margin: 0;
+  text-align: center;
+  flex-grow: 1; /* This will make sure h1 takes up space and remains centered */
+}
+
+/* Position the toggle in the top-right corner */
+.header-container .dark-mode-toggle {
+  position: absolute;
+  right: 10px; /* 10px from the right edge */
+}
