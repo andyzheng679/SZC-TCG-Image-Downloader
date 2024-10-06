@@ -18,3 +18,7 @@ I used React for the frontend and Spring Boot for the backend, and I containeriz
 
 <img src="https://github.com/andyzheng679/SZC-TCG-Image-Downloader/blob/eeffda1790cb875c03341219e6f554adb8aad6b8/Screenshot_2024-10-02_at_12.32.07_PM.png" />
 
+
+
+#Recent Updates:
+- Added dark mode toggle
