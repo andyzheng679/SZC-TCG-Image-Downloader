@@ -5,13 +5,9 @@ import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.PokemonServic
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 

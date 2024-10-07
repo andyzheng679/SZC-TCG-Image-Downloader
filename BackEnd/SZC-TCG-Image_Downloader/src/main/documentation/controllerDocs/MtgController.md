@@ -27,4 +27,4 @@ fileName: naming the img that is being downloaded the card name plus rarity plus
 .header(): HttpHeaders.CONTENT_DISPOSITION sets the CONTENT_DISPOSITION header, tells browser how to handle the response content. attachment tells the browser to download the file rather than display it.
 filename tells the browser what the file should be named. .contentType() MediaType.IMAGE_PNG sets the content type to png, lets the browser know it is receiving an PNG image file.
 .body() new InputStreamResource(inputStream) wraps inputStream, this allows Spring to directly stream the data to the client without having to save it to the server first, good for large files like images.
-
+Moved this to ImageDownloaderService.
