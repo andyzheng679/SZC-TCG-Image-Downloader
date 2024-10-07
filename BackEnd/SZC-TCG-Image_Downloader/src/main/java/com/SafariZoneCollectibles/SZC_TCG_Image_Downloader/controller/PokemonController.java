@@ -1,5 +1,6 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.controller;
 
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.ImageDownloaderService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.PokemonService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class PokemonController {
     @Autowired
     private PokemonService pokemonService;
 
+    @Autowired
+    private ImageDownloaderService imageDownloaderService;
+
 
     @GetMapping("/set")
     public ResponseEntity<Map<String, String>> getAllPokemonSets(){
@@ -40,14 +44,7 @@ public class PokemonController {
 
     @GetMapping("/download-image")
     public ResponseEntity<InputStreamResource> downloadImage(@RequestParam String imageUrl, @RequestParam String cardName, @RequestParam String rarity) throws Exception {
-        InputStream inputStream = new URL(imageUrl).openStream();
-
-        String fileName = cardName + "_" + rarity + ".png";
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-                .contentType(MediaType.IMAGE_PNG)
-                .body(new InputStreamResource(inputStream));
+        return imageDownloaderService.downloadImage(imageUrl, cardName, rarity);
     }
 
 }
