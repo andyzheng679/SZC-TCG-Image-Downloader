@@ -9,7 +9,7 @@ public class PokemonTest {
     //Arrange, Act, Assert
 
     @Test
-    void testPokemonConstructorAndGetters(){
+    void testConstructorAndGetters(){
         String name = "Venusaur ex";
         String rarity = "Double Rare";
         String imgUrl = "https://images.pokemontcg.io/sv7/1_hires.png";
