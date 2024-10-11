@@ -1,6 +1,7 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.serviceTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.PokemonService;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Pokemon;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -224,5 +226,59 @@ public class PokemonServiceTest {
         assertEquals(cardJson, results);
     }
 
-    
+    @Test
+    void testMapData() throws Exception{
+        JsonNode mockRootNode = mock(JsonNode.class);
+        JsonNode mockDataNode = mock(JsonNode.class);
+        JsonNode mockCardInfo = mock(JsonNode.class);
+
+        when(objectMapper.readTree(anyString())).thenReturn(mockRootNode);
+        when(mockRootNode.get("data")).thenReturn(mockDataNode);
+
+        Iterator<JsonNode> mockArrayData = mock(Iterator.class);
+        when(mockDataNode.elements()).thenReturn(mockArrayData);
+        when(mockArrayData.hasNext()).thenReturn(true, false);
+        when(mockArrayData.next()).thenReturn(mockCardInfo);
+
+        when(mockCardInfo.has("name")).thenReturn(true);
+        when(mockCardInfo.get("name")).thenReturn(mock(JsonNode.class));
+        when(mockCardInfo.get("name").asText()).thenReturn("Clefable");
+
+        when(mockCardInfo.has("rarity")).thenReturn(true);
+        when(mockCardInfo.get("rarity")).thenReturn(mock(JsonNode.class));
+        when(mockCardInfo.get("rarity").asText()).thenReturn("Rare Holo");
+
+        JsonNode mockImage = mock(JsonNode.class);
+        when(mockCardInfo.has("images")).thenReturn(true);
+        when(mockCardInfo.get("images")).thenReturn(mockImage);
+        when(mockImage.has("large")).thenReturn(true);
+        JsonNode mockLargeImage = mock(JsonNode.class);
+        when(mockImage.get("large")).thenReturn(mockLargeImage);
+        when(mockLargeImage.asText()).thenReturn("https://images.pokemontcg.io/base2/1_hires.png");
+
+        when(mockCardInfo.has("tcgplayer")).thenReturn(true);
+        JsonNode mockTCGPlayer = mock(JsonNode.class);
+        when(mockCardInfo.get("tcgplayer")).thenReturn(mockTCGPlayer);
+        when(mockTCGPlayer.has("url")).thenReturn(true);
+        JsonNode mockUrl = mock(JsonNode.class);
+        when(mockTCGPlayer.get("url")).thenReturn(mockUrl);
+        when(mockUrl.asText()).thenReturn("https://prices.pokemontcg.io/tcgplayer/base2-1");
+
+        when(mockCardInfo.has("number")).thenReturn(true);
+        when(mockCardInfo.get("number")).thenReturn(mock(JsonNode.class));
+        when(mockCardInfo.get("number").asText()).thenReturn("1");
+
+        ArrayList<Pokemon> result = pokemonService.mapData(cardJson);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        Pokemon pokemon = result.get(0);
+        assertEquals("Clefable-1", pokemon.getName());
+        assertEquals("Rare Holo", pokemon.getRarity());
+        assertEquals("https://images.pokemontcg.io/base2/1_hires.png", pokemon.getImgURL());
+        assertEquals("https://prices.pokemontcg.io/tcgplayer/base2-1", pokemon.getTcgplayerUrl());
+
+    }
+
+
 }
