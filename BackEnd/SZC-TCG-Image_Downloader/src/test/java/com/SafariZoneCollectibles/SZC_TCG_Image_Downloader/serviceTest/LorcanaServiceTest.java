@@ -1,6 +1,7 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.serviceTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.LorcanaService;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,10 +10,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,6 +76,34 @@ public class LorcanaServiceTest {
 
         assertNotNull(true);
         assertEquals(result, allSets);
+    }
+
+    @Test
+    void testAllSets() throws Exception{
+
+        JsonNode testRoot = mock(JsonNode.class);
+        when(objectMapper.readTree(anyString())).thenReturn(testRoot);
+
+        Iterator<JsonNode> testArrayData = mock(Iterator.class);
+        when(testRoot.elements()).thenReturn(testArrayData);
+
+        when(testArrayData.hasNext()).thenReturn(true, false);
+
+        JsonNode testSetData = mock(JsonNode.class);
+        when(testArrayData.next()).thenReturn(testSetData);
+
+        when(testSetData.get("Name")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("Name").asText()).thenReturn("The First Chapter");
+        when(testSetData.get("Set_Num")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("Set_Num").asInt()).thenReturn(1);
+//        no need to mock String.valueOf since it's basic Java method that will always work the same way
+//        when(String.valueOf(testSetData.get("Set_Num").asInt())).thenReturn("1");
+
+        Map<String, String> result = lorcanaService.allSets(allSets);
+
+        assertNotNull(true);
+        assertEquals(1, result.size());
+        assertEquals("1", result.get("The First Chapter"));
     }
 
     @Test
