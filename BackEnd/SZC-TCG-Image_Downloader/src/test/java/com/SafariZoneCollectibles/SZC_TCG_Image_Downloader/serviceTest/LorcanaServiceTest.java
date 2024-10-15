@@ -1,6 +1,7 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.serviceTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.LorcanaService;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Lorcana;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -113,5 +115,38 @@ public class LorcanaServiceTest {
 
         assertNotNull(true);
         assertEquals(result, getCards);
+    }
+
+    @Test
+    void testMapData() throws Exception{
+
+        JsonNode testRoot = mock(JsonNode.class);
+        when(objectMapper.readTree(anyString())).thenReturn(testRoot);
+
+        Iterator<JsonNode> testArrayData = mock(Iterator.class);
+        when(testRoot.elements()).thenReturn(testArrayData);
+
+        when(testArrayData.hasNext()).thenReturn(true, false);
+
+        JsonNode testSetData = mock(JsonNode.class);
+        when(testArrayData.next()).thenReturn(testSetData);
+
+        when(testSetData.has("Name")).thenReturn(true);
+        when(testSetData.get("Name")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("Name").asText()).thenReturn("Ariel - On Human Legs");
+
+        when(testSetData.has("Rarity")).thenReturn(true);
+        when(testSetData.get("Rarity")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("Rarity").asText()).thenReturn("Uncommon");
+
+        when(testSetData.has("Image")).thenReturn(true);
+        when(testSetData.get("Image")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("Image").asText()).thenReturn("https://lorcana-api.com/images/ariel/on_human_legs/ariel-on_human_legs-large.png");
+
+        List<Lorcana> result = lorcanaService.mapData(getCards);
+
+        assertNotNull(true);
+        assertEquals(1, result.size());
+        assertEquals("Ariel - On Human Legs", result.get(0).getName());
     }
 }
