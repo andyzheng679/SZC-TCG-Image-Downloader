@@ -19,6 +19,17 @@ I used React for the frontend and Spring Boot for the backend, and I containeriz
 <img src="https://github.com/andyzheng679/SZC-TCG-Image-Downloader/blob/eeffda1790cb875c03341219e6f554adb8aad6b8/Screenshot_2024-10-02_at_12.32.07_PM.png" />
 
 
+#UpComing Updates:
+- TestCases for ImageDownLoaderService, and Controller
+- TestCases for FrontEnd and addidtional documentation
+- Features:
+- Tcgplayer link for Lorcana cards, not included in external API.
+- Adding all variants of each card for Mtg.
+- UI Changes(Color?).
 
 #Recent Updates:
+- Deleted redundant code in MtgService.
+- TestCases for PokemonService, LorcanaService, MtgService.
+
+#Past Updates:
 - Added dark mode toggle
