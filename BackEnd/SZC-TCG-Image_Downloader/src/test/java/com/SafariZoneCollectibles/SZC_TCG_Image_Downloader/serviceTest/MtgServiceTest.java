@@ -266,87 +266,7 @@ public class MtgServiceTest {
         assertNotNull(result);
         assertEquals(result, allMtgCards);
     }
-
-//    @Test
-//    void testMapData() throws Exception {
-//
-//        JsonNode testRoot = mock(JsonNode.class);
-//        when(objectMapper.readTree(anyString())).thenReturn(testRoot);
-//
-//        JsonNode testData = mock(JsonNode.class);
-//        when(testRoot.get("data")).thenReturn(testData);
-//
-//        Iterator<JsonNode> testArrayData = mock(Iterator.class);
-//        when(testData.elements()).thenReturn(testArrayData);
-//
-//        when(testArrayData.hasNext()).thenReturn(true, true, false);
-//
-//        JsonNode testCardInfo = mock(JsonNode.class);
-//        JsonNode testCardInfo2 = mock(JsonNode.class);
-//
-//        when(testArrayData.next()).thenReturn(testCardInfo).thenReturn(testCardInfo2);
-//
-//        lenient().when(testCardInfo.has("image_uris")).thenReturn(true);
-//        JsonNode testImageUris = mock(JsonNode.class);
-//        lenient().when(testCardInfo.get("image_uris")).thenReturn(testImageUris);
-//        JsonNode testLarge = mock(JsonNode.class);
-//        lenient().when(testImageUris.get("large")).thenReturn(testLarge);
-//        lenient().when(testLarge.asText()).thenReturn("https://cards.scryfall.io/large/front/6/0/60cf954a-5503-460c-8720-8960842eea47.jpg?1726286109");
-//
-//        lenient().when(testCardInfo.has("name")).thenReturn(true);
-//        JsonNode testNameNode = mock(JsonNode.class);
-//        lenient().when(testCardInfo.get("name")).thenReturn(testNameNode);
-//        lenient().when(testNameNode.asText()).thenReturn("Paranormal Analyst");
-//
-//        lenient().when(testCardInfo.has("rarity")).thenReturn(true);
-//        JsonNode testRarityNode = mock(JsonNode.class);
-//        lenient().when(testCardInfo.get("rarity")).thenReturn(testRarityNode);
-//        lenient().when(testRarityNode.asText()).thenReturn("uncommon");
-//
-//        lenient().when(testCardInfo.has("purchase_uris")).thenReturn(true);
-//        JsonNode testPurchaseUris = mock(JsonNode.class);
-//        lenient().when(testCardInfo.get("purchase_uris")).thenReturn(testPurchaseUris);
-//        JsonNode testTcgPlayerNode = mock(JsonNode.class);
-//        lenient().when(testPurchaseUris.get("tcgplayer")).thenReturn(testTcgPlayerNode);
-//        lenient().when(testTcgPlayerNode.asText()).thenReturn("https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F578055%3Fpage%3D1");
-//
-//        lenient().when(testCardInfo2.has("card_faces")).thenReturn(true);
-//        JsonNode testCardFaces = mock(JsonNode.class);
-//        lenient().when(testCardInfo2.get("card_faces")).thenReturn(testCardFaces);
-//        JsonNode testFrontFace = mock(JsonNode.class);
-//        lenient().when(testCardFaces.get(0)).thenReturn(testFrontFace);
-//
-//        lenient().when(testFrontFace.has("name")).thenReturn(true);
-//        JsonNode testFrontFaceNameNode = mock(JsonNode.class);
-//        lenient().when(testFrontFace.get("name")).thenReturn(testFrontFaceNameNode);
-//        lenient().when(testFrontFaceNameNode.asText()).thenReturn("Paranormal Analyst2");
-//
-//        lenient().when(testCardInfo2.has("rarity")).thenReturn(true);
-//        JsonNode testCardInfo2RarityNode = mock(JsonNode.class);
-//        lenient().when(testCardInfo2.get("rarity")).thenReturn(testCardInfo2RarityNode);
-//        lenient().when(testCardInfo2RarityNode.asText()).thenReturn("uncommon");
-//
-//        lenient().when(testFrontFace.has("image_uris")).thenReturn(true);
-//        JsonNode testFrontFaceImageUris = mock(JsonNode.class);
-//        lenient().when(testFrontFace.get("image_uris")).thenReturn(testFrontFaceImageUris);
-//        JsonNode testFrontFaceLarge = mock(JsonNode.class);
-//        lenient().when(testFrontFaceImageUris.get("large")).thenReturn(testFrontFaceLarge);
-//        lenient().when(testFrontFaceLarge.asText()).thenReturn("https://cards.scryfall.io/large/front/6/0/60cf954a-5503-460c-8720-8960842eea47.jpg?1726286109");
-//
-//        lenient().when(testCardInfo2.has("purchase_uris")).thenReturn(true);
-//        JsonNode testCardInfo2PurchaseUris = mock(JsonNode.class);
-//        lenient().when(testCardInfo2.get("purchase_uris")).thenReturn(testCardInfo2PurchaseUris);
-//        JsonNode testCardInfo2TcgPlayerNode = mock(JsonNode.class);
-//        lenient().when(testCardInfo2PurchaseUris.get("tcgplayer")).thenReturn(testCardInfo2TcgPlayerNode);
-//        lenient().when(testCardInfo2TcgPlayerNode.asText()).thenReturn("https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F578055%3Fpage%3D1");
-//
-//        ArrayList<Mtg> result = mtgService.mapData(allMtgCards);
-//
-//        assertNotNull(result);
-//        assertEquals(2, result.size());
-//        assertEquals("Paranormal Analyst", result.get(0).getName());
-//        assertEquals("Paranormal Analyst2", result.get(1).getName());
-//    }
+    
 
     @Test
     void testMapData() throws Exception{
@@ -415,7 +335,43 @@ public class MtgServiceTest {
         JsonNode testCardInfo = mock(JsonNode.class);
         when(testArrayData.next()).thenReturn(testCardInfo);
 
+        when(testCardInfo.has("image_uris")).thenReturn(false);
+        when(testCardInfo.has("card_faces")).thenReturn(true);
+        JsonNode testCardFace = mock(JsonNode.class);
+        when(testCardInfo.get("card_faces")).thenReturn(testCardFace);
+        JsonNode testFrontFace = mock(JsonNode.class);
+        when(testCardFace.get(0)).thenReturn(testFrontFace);
 
+        when(testFrontFace.has("name")).thenReturn(true);
+        when(testFrontFace.get("name")).thenReturn(mock(JsonNode.class));
+        when(testFrontFace.get("name").asText()).thenReturn("Paranormal Analyst");
+
+        when(testCardInfo.has("rarity")).thenReturn(true);
+        when(testCardInfo.get("rarity")).thenReturn(mock(JsonNode.class));
+        when(testCardInfo.get("rarity").asText()).thenReturn("uncommon");
+
+        when(testFrontFace.has("image_uris")).thenReturn(true);
+        JsonNode testImageUris = mock(JsonNode.class);
+        when(testFrontFace.get("image_uris")).thenReturn(testImageUris);
+        when(testImageUris.has("large")).thenReturn(true);
+        JsonNode testLarge = mock(JsonNode.class);
+        when(testImageUris.get("large")).thenReturn(testLarge);
+        when(testLarge.asText()).thenReturn("https://cards.scryfall.io/large/front/6/0/60cf954a-5503-460c-8720-8960842eea47.jpg?1726286109");
+
+        when(testCardInfo.has("purchase_uris")).thenReturn(true);
+        JsonNode testPurchaseUris = mock(JsonNode.class);
+        when(testCardInfo.get("purchase_uris")).thenReturn(testPurchaseUris);
+        when(testPurchaseUris.has("tcgplayer")).thenReturn(true);
+        JsonNode testTcgplayer = mock(JsonNode.class);
+        when(testPurchaseUris.get("tcgplayer")).thenReturn(testTcgplayer);
+        when(testTcgplayer.asText()).thenReturn("https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F578055%3Fpage%3D1");
+
+        ArrayList<Mtg> result = mtgService.mapData(allMtgCards);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("uncommon", result.get(0).getRarity());
+        assertEquals("https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F578055%3Fpage%3D1", result.get(0).getTcgplayerUrl());
     }
 
 
