@@ -48,7 +48,7 @@ public class MtgService {
                 if (cardInfo.has("image_uris")){
                     String name = cardInfo.has("name") ? cardInfo.get("name").asText() : "Unknown";
                     String rarity = cardInfo.has("rarity") ? cardInfo.get("rarity").asText() : "Unknown";
-                    String imgURL = cardInfo.has("image_uris") && cardInfo.get("image_uris").has("large")
+                    String imgURL = cardInfo.get("image_uris").has("large")
                             ? cardInfo.get("image_uris").get("large").asText()
                             : "NoImageURL";
                     String tcgplayerUrl = cardInfo.has("purchase_uris") && cardInfo.get("purchase_uris").has("tcgplayer")
