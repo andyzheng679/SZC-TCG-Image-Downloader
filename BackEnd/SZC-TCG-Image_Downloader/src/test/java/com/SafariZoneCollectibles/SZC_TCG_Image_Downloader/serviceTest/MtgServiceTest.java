@@ -1,6 +1,8 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.serviceTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.MtgService;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Mtg;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,10 +11,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -219,8 +225,37 @@ public class MtgServiceTest {
         when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(allSets);
         String result = mtgService.getMtgSets();
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(result, allSets);
+    }
+
+    @Test
+    void testAllSets()throws Exception{
+
+        JsonNode testRoot = mock(JsonNode.class);
+        when(objectMapper.readTree(anyString())).thenReturn(testRoot);
+
+        JsonNode testData = mock(JsonNode.class);
+        when(testRoot.get("data")).thenReturn(testData);
+
+        Iterator<JsonNode> testArrayData = mock(Iterator.class);
+        when(testData.elements()).thenReturn(testArrayData);
+
+        when(testArrayData.hasNext()).thenReturn(true, false);
+
+        JsonNode testSetData = mock(JsonNode.class);
+        when(testArrayData.next()).thenReturn(testSetData);
+
+        when(testSetData.get("name")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("name").asText()).thenReturn("Limited Edition Alpha");
+        when(testSetData.get("code")).thenReturn(mock(JsonNode.class));
+        when(testSetData.get("code").asText()).thenReturn("lea");
+
+        Map<String, String> result = mtgService.allSets(allSets);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("lea", result.get("Limited Edition Alpha"));
     }
 
     @Test
@@ -228,9 +263,12 @@ public class MtgServiceTest {
         when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(allMtgCards);
         String result = mtgService.getMtgCardSet("dsk");
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(result, allMtgCards);
     }
 
-// testing new token
+    @Test
+    void testMapData()throws Exception{
+        //
+    }
 }

@@ -76,7 +76,7 @@ public class LorcanaServiceTest {
         when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(allSets);
         String result = lorcanaService.getLorcanaSets();
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(result, allSets);
     }
 
@@ -103,7 +103,7 @@ public class LorcanaServiceTest {
 
         Map<String, String> result = lorcanaService.allSets(allSets);
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("1", result.get("The First Chapter"));
     }
@@ -113,7 +113,7 @@ public class LorcanaServiceTest {
         when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(getCards);
         String result = lorcanaService.getAllCards("1");
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(result, getCards);
     }
 
@@ -145,7 +145,7 @@ public class LorcanaServiceTest {
 
         List<Lorcana> result = lorcanaService.mapData(getCards);
 
-        assertNotNull(true);
+        assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("Ariel - On Human Legs", result.get(0).getName());
     }
