@@ -266,7 +266,7 @@ public class MtgServiceTest {
         assertNotNull(result);
         assertEquals(result, allMtgCards);
     }
-    
+
 
     @Test
     void testMapData() throws Exception{
@@ -373,6 +373,102 @@ public class MtgServiceTest {
         assertEquals("uncommon", result.get(0).getRarity());
         assertEquals("https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F578055%3Fpage%3D1", result.get(0).getTcgplayerUrl());
     }
+
+    @Test
+    void testMapData3() throws Exception {
+
+        JsonNode testRoot = mock(JsonNode.class);
+        when(objectMapper.readTree(anyString())).thenReturn(testRoot);
+
+        JsonNode testData = mock(JsonNode.class);
+        when(testRoot.get("data")).thenReturn(testData);
+
+        Iterator<JsonNode> testArrayData = mock(Iterator.class);
+        when(testData.elements()).thenReturn(testArrayData);
+
+        JsonNode testCardInfoWithImageUris = mock(JsonNode.class);
+        JsonNode testCardInfoWithCardFaces = mock(JsonNode.class);
+
+        when(testArrayData.hasNext()).thenReturn(true, true, false);
+        when(testArrayData.next()).thenReturn(testCardInfoWithImageUris, testCardInfoWithCardFaces);
+
+        when(testCardInfoWithImageUris.has("image_uris")).thenReturn(true);
+        JsonNode imageUrisNode = mock(JsonNode.class);
+        when(testCardInfoWithImageUris.get("image_uris")).thenReturn(imageUrisNode);
+        when(imageUrisNode.has("large")).thenReturn(true);
+        JsonNode largeImageNode = mock(JsonNode.class);
+        when(imageUrisNode.get("large")).thenReturn(largeImageNode);
+        when(largeImageNode.asText()).thenReturn("https://example.com/large.jpg");
+
+        when(testCardInfoWithImageUris.has("name")).thenReturn(true);
+        JsonNode nameNode = mock(JsonNode.class);
+        when(testCardInfoWithImageUris.get("name")).thenReturn(nameNode);
+        when(nameNode.asText()).thenReturn("Card with Image");
+
+        when(testCardInfoWithImageUris.has("rarity")).thenReturn(true);
+        JsonNode rarityNode = mock(JsonNode.class);
+        when(testCardInfoWithImageUris.get("rarity")).thenReturn(rarityNode);
+        when(rarityNode.asText()).thenReturn("rare");
+
+        when(testCardInfoWithImageUris.has("purchase_uris")).thenReturn(true);
+        JsonNode purchaseUrisNode1 = mock(JsonNode.class);
+        when(testCardInfoWithImageUris.get("purchase_uris")).thenReturn(purchaseUrisNode1);
+        JsonNode tcgplayerNode1 = mock(JsonNode.class);
+        when(purchaseUrisNode1.has("tcgplayer")).thenReturn(true);
+        when(purchaseUrisNode1.get("tcgplayer")).thenReturn(tcgplayerNode1);
+        when(tcgplayerNode1.asText()).thenReturn("https://example.com/tcgplayer-card1");
+
+
+        when(testCardInfoWithCardFaces.has("image_uris")).thenReturn(false);
+        when(testCardInfoWithCardFaces.has("card_faces")).thenReturn(true); 
+
+        JsonNode cardFacesNode = mock(JsonNode.class);
+        when(testCardInfoWithCardFaces.get("card_faces")).thenReturn(cardFacesNode);
+
+        JsonNode frontFaceNode = mock(JsonNode.class);
+        when(cardFacesNode.get(0)).thenReturn(frontFaceNode);
+
+        when(frontFaceNode.has("name")).thenReturn(true);
+        JsonNode frontFaceNameNode = mock(JsonNode.class);
+        when(frontFaceNode.get("name")).thenReturn(frontFaceNameNode);
+        when(frontFaceNameNode.asText()).thenReturn("Card with Faces");
+
+        when(testCardInfoWithCardFaces.has("rarity")).thenReturn(true);
+        JsonNode rarityNode2 = mock(JsonNode.class);
+        when(testCardInfoWithCardFaces.get("rarity")).thenReturn(rarityNode2);
+        when(rarityNode2.asText()).thenReturn("uncommon");
+
+        JsonNode frontFaceImageUrisNode = mock(JsonNode.class);
+        when(frontFaceNode.has("image_uris")).thenReturn(true);
+        when(frontFaceNode.get("image_uris")).thenReturn(frontFaceImageUrisNode);
+        when(frontFaceImageUrisNode.has("large")).thenReturn(true);
+        JsonNode frontFaceLargeImageNode = mock(JsonNode.class);
+        when(frontFaceImageUrisNode.get("large")).thenReturn(frontFaceLargeImageNode);
+        when(frontFaceLargeImageNode.asText()).thenReturn("https://example.com/large-card-face.jpg");
+
+        when(testCardInfoWithCardFaces.has("purchase_uris")).thenReturn(true);
+        JsonNode purchaseUrisNode2 = mock(JsonNode.class);
+        when(testCardInfoWithCardFaces.get("purchase_uris")).thenReturn(purchaseUrisNode2);
+        JsonNode tcgplayerNode2 = mock(JsonNode.class);
+        when(purchaseUrisNode2.has("tcgplayer")).thenReturn(true);
+        when(purchaseUrisNode2.get("tcgplayer")).thenReturn(tcgplayerNode2);
+        when(tcgplayerNode2.asText()).thenReturn("https://example.com/tcgplayer-card2");
+
+        ArrayList<Mtg> result = mtgService.mapData("mock json data");
+
+        assertEquals(2, result.size());
+        assertEquals("Card with Image", result.get(0).getName());
+        assertEquals("rare", result.get(0).getRarity());
+        assertEquals("https://example.com/large.jpg", result.get(0).getImgURL());
+        assertEquals("https://example.com/tcgplayer-card1", result.get(0).getTcgplayerUrl());
+
+        assertEquals("Card with Faces", result.get(1).getName());
+        assertEquals("uncommon", result.get(1).getRarity());
+        assertEquals("https://example.com/large-card-face.jpg", result.get(1).getImgURL());
+        assertEquals("https://example.com/tcgplayer-card2", result.get(1).getTcgplayerUrl());
+    }
+
+
 
 
 
