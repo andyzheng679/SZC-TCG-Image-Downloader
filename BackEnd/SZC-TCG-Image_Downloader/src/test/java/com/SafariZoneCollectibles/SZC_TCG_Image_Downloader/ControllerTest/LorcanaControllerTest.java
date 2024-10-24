@@ -44,7 +44,7 @@ public class LorcanaControllerTest {
         mockMap.put("Set 2", "2");
 
         when(lorcanaService.allSets(anyString())).thenReturn(mockMap);
-        when(lorcanaService.getLorcanaSets()).thenReturn("set url");
+        when(lorcanaService.getLorcanaSets()).thenReturn("Json String of all sets");
 
         mockMvc.perform(get("/lorcana/set").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
