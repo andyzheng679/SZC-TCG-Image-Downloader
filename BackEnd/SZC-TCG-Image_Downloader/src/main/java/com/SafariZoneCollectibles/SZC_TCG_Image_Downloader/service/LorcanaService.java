@@ -59,7 +59,7 @@ public class LorcanaService {
         return(restTemplate.getForObject(url, String.class));
     }
 
-    public List<Lorcana> mapData(String getAllCards){
+    public ArrayList<Lorcana> mapData(String getAllCards){
         ArrayList<Lorcana> allCards = new ArrayList<>();
 
         try{

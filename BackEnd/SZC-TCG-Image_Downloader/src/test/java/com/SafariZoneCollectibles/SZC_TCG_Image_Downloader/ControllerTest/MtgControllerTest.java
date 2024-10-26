@@ -1,6 +1,7 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.ControllerTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.controller.MtgController;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.helperClass.URLHelper;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.ImageDownloaderService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.MtgService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Mtg;
@@ -33,6 +34,9 @@ public class MtgControllerTest {
 
     @MockBean
     private ImageDownloaderService imageDownloaderService;
+
+    @MockBean
+    private URLHelper urlHelper;
 
     @Test
     public void testGetAllMtgSets() throws Exception{

@@ -1,6 +1,7 @@
 package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.ControllerTest;
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.controller.PokemonController;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.helperClass.URLHelper;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.ImageDownloaderService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.PokemonService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Pokemon;
@@ -32,6 +33,9 @@ public class PokemonControllerTest {
 
     @MockBean
     private ImageDownloaderService imageDownloaderService;
+
+    @MockBean
+    private URLHelper urlHelper;
 
     @Test
     public void testGetAllPokemonSets() throws Exception{

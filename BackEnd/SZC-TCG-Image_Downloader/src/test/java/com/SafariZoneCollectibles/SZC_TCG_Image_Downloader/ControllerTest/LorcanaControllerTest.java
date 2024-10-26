@@ -2,6 +2,7 @@ package com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.ControllerTest;
 
 
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.controller.LorcanaController;
+import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.helperClass.URLHelper;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.ImageDownloaderService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.LorcanaService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Lorcana;
@@ -14,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -36,6 +36,9 @@ public class LorcanaControllerTest {
     @MockBean
     private ImageDownloaderService imageDownloaderService;
 
+    @MockBean
+    private URLHelper urlHelper;
+
     @Test
     public void testGetAllSets() throws Exception{
 
@@ -54,7 +57,7 @@ public class LorcanaControllerTest {
     @Test
     public void testGetAllCards() throws Exception{
 
-        List<Lorcana> mockArrayList = new ArrayList<>();
+        ArrayList<Lorcana> mockArrayList = new ArrayList<>();
         mockArrayList.add(new Lorcana("name", "rarity", "imgURL"));
 
         when(lorcanaService.getAllCards(anyString())).thenReturn("Json String of all cards");
