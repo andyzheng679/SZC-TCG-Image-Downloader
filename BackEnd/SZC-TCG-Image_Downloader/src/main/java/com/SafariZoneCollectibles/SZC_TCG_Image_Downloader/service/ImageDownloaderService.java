@@ -14,8 +14,8 @@ import java.net.URL;
 public class ImageDownloaderService {
 
 
-    public ResponseEntity<InputStreamResource> downloadImage( String imageUrl, String cardName, String rarity) throws Exception {
-        InputStream inputStream = new URL(imageUrl).openStream();
+    public ResponseEntity<InputStreamResource> downloadImage( URL imageUrl, String cardName, String rarity) throws Exception {
+        InputStream inputStream = imageUrl.openStream();
 
         String fileName = cardName + "_" + rarity + ".png";
 
