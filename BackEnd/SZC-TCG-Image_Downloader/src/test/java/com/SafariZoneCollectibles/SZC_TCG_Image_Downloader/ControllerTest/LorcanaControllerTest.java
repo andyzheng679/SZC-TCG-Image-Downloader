@@ -7,22 +7,27 @@ import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.ImageDownload
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.service.LorcanaService;
 import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Lorcana;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(LorcanaController.class)
 public class LorcanaControllerTest {
@@ -38,6 +43,9 @@ public class LorcanaControllerTest {
 
     @MockBean
     private URLHelper urlHelper;
+
+    @Mock
+    private URL mockUrl;
 
     @Test
     public void testGetAllSets() throws Exception{
@@ -66,6 +74,26 @@ public class LorcanaControllerTest {
         mockMvc.perform(get("/lorcana/set/{setNum}", "1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"name\":\"name\",\"rarity\":\"rarity\",\"imgURL\":\"imgURL\"}]"));
+    }
+
+    @Test
+    public void testDownloadImage() throws Exception{
+        when(urlHelper.convertStringToURL(anyString())).thenReturn(mockUrl);
+
+        ResponseEntity<InputStreamResource> mockResponseEntity = ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Name_Rarity.png\"")
+                .contentType(MediaType.IMAGE_PNG)
+                .body(null);
+
+        when(imageDownloaderService.downloadImage(any(URL.class), anyString(), anyString())).thenReturn(mockResponseEntity);
+
+        mockMvc.perform(get("/lorcana/download-image")
+                        .param("imageUrl", "http://test.png")
+                        .param("cardName", "Name")
+                        .param("rarity", "Rarity"))
+                .andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Name_Rarity.png\""))
+                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, "image/png"));
     }
 
 
