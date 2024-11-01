@@ -16,8 +16,8 @@ public Map<String, String> allSets(String getLorcanaSets) - returns a Map of key
 Created a Map<String, String> to hold all the key value pairs.
 Uses LinkedHashMap<>(); bc want data in the order they were inserted. In a try - catch loop, in the event there is an issue with the mapping.
 Catches the exception in variable e, then .printStackTrace will provide a report that includes: type of exception, error message, and all the actions that led up to the error and the file/line.
-.readTree() method of ObjectMapper turns the JSON string into a tree-like structure. JsonNode datatype is used to hold and navigate the tree-like structure.
-sing Iterator to loop through the elements in the Json Array in data variable. Iterating over a collection of JsonNodes.
+.readTree() method of ObjectMapper turns the JSON string into a tree-like structure. JsonNode datatype is used to hold and navigate the tree-like structure. 
+Using Iterator to loop through the elements in the Json Array in data variable. Iterating over a collection of JsonNodes.
 .elements() method is used to return an Iterator of elements in the Json array.
 While there is still another element in the array, set that element to a JsonNode variable. 
 Get the value of Name and Set_Num, converting value of Set_Num bc it's an Integer in the Json, converting it to a string, so it can be used in the allCardFromSetURL URL.
