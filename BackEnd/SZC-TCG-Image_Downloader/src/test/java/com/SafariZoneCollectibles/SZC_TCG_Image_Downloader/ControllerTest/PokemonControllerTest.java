@@ -47,7 +47,7 @@ public class PokemonControllerTest {
     private URL mockUrl;
 
     @Test
-    public void testGetAllPokemonSets() throws Exception{
+    void testGetAllPokemonSets() throws Exception{
 
         Map<String, String> mockMap = new HashMap<>();
         mockMap.put("Set 1", "1");
@@ -62,7 +62,7 @@ public class PokemonControllerTest {
     }
 
     @Test
-    public void testGetDataById() throws Exception{
+    void testGetDataById() throws Exception{
 
         ArrayList<Pokemon> mockArrayList = new ArrayList<>();
         mockArrayList.add(new Pokemon("name", "rarity", "imgURL", "tcgplayerUrl"));
@@ -76,7 +76,7 @@ public class PokemonControllerTest {
     }
 
     @Test
-    public void testDownloadImage() throws Exception{
+    void testDownloadImage() throws Exception{
         when(urlHelper.convertStringToURL(anyString())).thenReturn(mockUrl);
 
         ResponseEntity<InputStreamResource> mockResponseEntity = ResponseEntity.ok()

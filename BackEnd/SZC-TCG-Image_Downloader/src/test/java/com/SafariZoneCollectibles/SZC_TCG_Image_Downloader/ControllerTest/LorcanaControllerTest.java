@@ -48,7 +48,7 @@ public class LorcanaControllerTest {
     private URL mockUrl;
 
     @Test
-    public void testGetAllSets() throws Exception{
+    void testGetAllSets() throws Exception{
 
         Map<String, String> mockMap = new HashMap<>();
         mockMap.put("Set 1", "1");
@@ -63,7 +63,7 @@ public class LorcanaControllerTest {
     }
 
     @Test
-    public void testGetAllCards() throws Exception{
+    void testGetAllCards() throws Exception{
 
         ArrayList<Lorcana> mockArrayList = new ArrayList<>();
         mockArrayList.add(new Lorcana("name", "rarity", "imgURL"));
@@ -77,7 +77,7 @@ public class LorcanaControllerTest {
     }
 
     @Test
-    public void testDownloadImage() throws Exception{
+    void testDownloadImage() throws Exception{
         when(urlHelper.convertStringToURL(anyString())).thenReturn(mockUrl);
 
         ResponseEntity<InputStreamResource> mockResponseEntity = ResponseEntity.ok()

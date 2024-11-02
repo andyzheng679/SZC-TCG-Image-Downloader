@@ -47,7 +47,7 @@ public class MtgControllerTest {
     private URL mockUrl;
 
     @Test
-    public void testGetAllMtgSets() throws Exception{
+    void testGetAllMtgSets() throws Exception{
 
         Map<String, String> mockMap = new HashMap<>();
         mockMap.put("Set 1", "1");
@@ -63,7 +63,7 @@ public class MtgControllerTest {
     }
 
     @Test
-    public void testGetDataByCode() throws Exception{
+    void testGetDataByCode() throws Exception{
         ArrayList<Mtg> mockArrayList = new ArrayList<>();
         mockArrayList.add(new Mtg("name", "rarity", "imgURL", "tcgplayerUrl"));
 
@@ -77,7 +77,7 @@ public class MtgControllerTest {
     }
 
     @Test
-    public void testDownloadImage() throws Exception{
+    void testDownloadImage() throws Exception{
         when(urlHelper.convertStringToURL(anyString())).thenReturn(mockUrl);
 
         ResponseEntity<InputStreamResource> mockResponseEntity = ResponseEntity.ok()
