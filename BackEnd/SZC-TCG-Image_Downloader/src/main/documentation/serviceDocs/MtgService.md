@@ -27,7 +27,12 @@ Then assign them to variables, make a new instance of Mtg using those variables,
 else, check if it has ......, assign to variables, make new instance of Mtg with those variables and add it to the arraylist.
 Using the ternary operator: condition ? valueIfTrue : valueIfFalse. It evaluates the condition before the ?, and depending on true or false, returns the value.
 if statement to see if there are more pages, see's if it contains "has_more", and if the "has_more" is true.
-if all is true, set the url for the next page to nextPageUrl, then perform a HTTP GET request to obtain all the data from the next page.
+if all is true, set the url for the next page to nextPageUrl, then use the URI class to take the URL String that contains a special character (%3A, which is a :),
+and converts it into a properly encoded URI, a safe format that can be processed.
+UriComponentsBuilder is an utility class, ensure correct formatting and applies encoding, helps construct and modify URIs, UriComponent.
+.fromHttpUrl() takes in the URL String to modify or encode. .build(true) makes sure to encode the URL, the URL is already encoded, but it is in just in case.
+.toUri() converts the UriComponent into a URI. 
+then perform a HTTP GET request to obtain all the data from the next page.
 Calls mapData recursively and takes all the arrays created and adds them to the end of the existing mtgCardsData.
 
 public String getMtgCardSet(String code) - Returns raw JSON response from the API as a string, .getForObject() is used to send HTTP GET request to the URL,
