@@ -4,9 +4,16 @@ import com.SafariZoneCollectibles.SZC_TCG_Image_Downloader.tcgCard.Mtg;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -87,10 +94,10 @@ public class MtgService {
             }
 
             if (root.has("has_more") && root.get("has_more").asBoolean()) {
-
                 String nextPageUrl = root.get("next_page").asText();
-                String nextPageData = restTemplate.getForObject(nextPageUrl, String.class);
+                URI uri = UriComponentsBuilder.fromHttpUrl(nextPageUrl).build(true).toUri();
 
+                String nextPageData = restTemplate.getForObject(uri, String.class);
                 mtgCardsData.addAll(mapData(nextPageData));
             }
 
