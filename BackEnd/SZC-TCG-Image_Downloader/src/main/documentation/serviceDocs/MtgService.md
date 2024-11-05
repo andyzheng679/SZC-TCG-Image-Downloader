@@ -30,7 +30,9 @@ if statement to see if there are more pages, see's if it contains "has_more", an
 if all is true, set the url for the next page to nextPageUrl, then use the URI class to take the URL String that contains a special character (%3A, which is a :),
 and converts it into a properly encoded URI, a safe format that can be processed.
 UriComponentsBuilder is an utility class, ensure correct formatting and applies encoding, helps construct and modify URIs, UriComponent.
-.fromHttpUrl() takes in the URL String to modify or encode. .build(true) makes sure to encode the URL, the URL is already encoded, but it is in just in case.
+.fromHttpUrl() takes in the URL String to modify or encode. .build(true) since the String Url is already encoded, if set to false, it will encode the String.
+The reason why we need to do this is to prevent double encoding, since %3A means : and is already encoded, passing a String url into the restTemplate will encode the
+% in the %3A which will result in a %253A
 .toUri() converts the UriComponent into a URI. 
 then perform a HTTP GET request to obtain all the data from the next page.
 Calls mapData recursively and takes all the arrays created and adds them to the end of the existing mtgCardsData.
