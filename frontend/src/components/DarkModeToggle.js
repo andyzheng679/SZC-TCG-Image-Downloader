@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './DarkModeToggle.css'; // Make sure to include the CSS file
+import './DarkModeToggle.css'; 
 
 function DarkModeToggle() {
   const [darkMode, setDarkMode] = useState(false);
@@ -8,7 +8,7 @@ function DarkModeToggle() {
     setDarkMode(prevMode => !prevMode);
   };
 
-  // Apply or remove the dark-mode class based on the state
+
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
